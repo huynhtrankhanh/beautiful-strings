@@ -62,8 +62,6 @@ int main()
 
         int result = 0;
 
-        // int unofficial = 0;
-
         for (int i = 0; i < n; i++)
             for (int j = i + 3; j < n; j++)
             {
@@ -76,6 +74,5 @@ int main()
             }
 
         cout << result << "\n";
-        // cout << "Unofficial: " << unofficial << "\n";
     }
 }
