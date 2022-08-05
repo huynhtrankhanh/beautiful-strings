@@ -182,6 +182,8 @@ int main()
 
     sort(partitions.begin(), partitions.end());
 
+    vector<tuple<int, int, int, int>> predicted_added;
+
     for (auto &[middle_part_left, middle_part_right, length_a, length_b] : partitions)
     {
         cout << "Middle part left = " << middle_part_left << ", middle part right = " << middle_part_right << ", length A = " << length_a << ", length B = " << length_b << "\n";
@@ -222,7 +224,14 @@ int main()
         int predicted_count = min(z[middle_part_left][middle_part_right + 1], middle_part_right - middle_part_left) - length_a;
         cout << "Predicted count for this square substring: " << predicted_count << "\n";
         cout << "--------------------\n";
+        predicted_added.emplace_back(middle_part_left, middle_part_right, length_a, predicted_count);
     }
 
+    predicted_added.erase(unique(predicted_added.begin(), predicted_added.end()), predicted_added.end());
+
+    int predicted_total_count = 0;
+    for (auto &[a, b, c, count]: predicted_added) predicted_total_count += count;
+
     cout << "Total count: " << partitions.size() << "\n";
+    cout << "Predicted total count: " << predicted_total_count << "\n";
 }
