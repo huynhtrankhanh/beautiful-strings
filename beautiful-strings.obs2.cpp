@@ -90,6 +90,8 @@ H hashString(string &s)
     return h;
 }
 
+int z[5001][5001], square_substring_count[5001][5001];
+
 int main()
 {
     cin.tie(0)->sync_with_stdio(0);
@@ -106,6 +108,35 @@ int main()
     };
 
     int n = s.size();
+
+    for (int i = n - 1; i >= 0; i--)
+        for (int j = n - 1; j >= 0; j--)
+        {
+            if (s[i] == s[j])
+            {
+                if (i != n - 1 && j != n - 1)
+                    z[i][j] = 1 + z[i + 1][j + 1];
+                else
+                    z[i][j] = 1;
+            }
+            else
+                z[i][j] = 0;
+        }
+
+    fill(square_substring_count[0], square_substring_count[0] + n + 1, 0);
+    for (int i = 1; i < n; i++)
+    {
+        int counter = 0;
+        fill(square_substring_count[i], square_substring_count[i] + n + 1, 0);
+        for (int length = 1; length <= min(i, n - i); length++)
+        {
+            counter += z[i - length][i] >= length;
+            square_substring_count[i][length] = counter;
+        }
+
+        for (int length = min(i, n - i) + 1; length <= n; length++)
+            square_substring_count[i][length] = counter;
+    }
 
     // (middle_part_left, middle_part_right, length_a, length_b)
     using information_t = tuple<int, int, int, int>;
