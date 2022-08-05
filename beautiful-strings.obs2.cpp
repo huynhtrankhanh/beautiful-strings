@@ -219,6 +219,9 @@ int main()
         for (int i = 0; i < length_b; i++)
             cout << "B";
         cout << "\n";
+        int predicted_count = min(z[middle_part_left][middle_part_right + 1], middle_part_right - middle_part_left) - length_a;
+        cout << "Predicted count for this square substring: " << predicted_count << "\n";
+        cout << "--------------------\n";
     }
 
     cout << "Total count: " << partitions.size() << "\n";
