@@ -1,7 +1,8 @@
 #include <bits/stdc++.h>
 using namespace std;
+#define int long long
 int z[5001][5001], square_substring_accumulated_length[5001][5001], square_substring_count[5001][5001];
-int main()
+signed main()
 {
     cin.tie(0)->sync_with_stdio(0);
 
@@ -63,7 +64,7 @@ int main()
         int result = 0;
 
         for (int i = 0; i < n; i++)
-            for (int j = i + 3; j < n; j++)
+            for (int j = i + 1; j < n; j++)
             {
                 int w = min(j - i, z[i][j]);
 
